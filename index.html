@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#141511">
+  <meta name="description" content="Painel de estoque, vendas e relatórios financeiros do Grupo HL.">
+  <title>Grupo HL • Estoque e Financeiro</title>
+  <link rel="icon" href="assets/logo-hl.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/reports.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="desktopSidebar" aria-label="Menu principal">
+      <div class="sidebar-inner">
+        <a class="brand" href="#inicio" aria-label="Grupo HL, voltar ao início">
+          <span class="brand-logo"><img src="assets/logo-hl.jpg" alt="Símbolo Grupo HL"></span>
+          <span class="brand-copy"><b>GRUPO <em>HL</em></b><small>GESTÃO & ESTOQUE</small></span>
+        </a>
+        <div class="sidebar-rule"></div>
+        <div class="nav-caption">PAINEL</div>
+        <nav class="side-nav" aria-label="Seções do painel">
+          <a class="side-link active" href="#inicio" data-section="inicio"><i class="bi bi-grid-1x2"></i><span>Visão geral</span></a>
+          <a class="side-link" href="#produtos" data-section="produtos"><i class="bi bi-box-seam"></i><span>Produtos</span></a>
+          <a class="side-link" href="#historico" data-section="historico"><i class="bi bi-arrow-left-right"></i><span>Movimentações</span></a>
+          <a class="side-link" href="#relatorios" data-section="relatorios"><i class="bi bi-bar-chart-line"></i><span>Relatórios</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-help"><span class="help-icon"><i class="bi bi-shield-check"></i></span><div><strong>Controle organizado</strong><small>Dados salvos neste navegador</small></div></div>
+          <div class="side-version"><span class="status-dot"></span> Versão demonstrativa <span class="ms-auto">v3.0</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="inicio">
+      <div class="mobile-topbar">
+        <button class="mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Abrir menu"><i class="bi bi-list"></i></button>
+        <a href="#inicio" class="mobile-brand"><img src="assets/logo-hl.jpg" alt="Logo Grupo HL"><b>GRUPO <span>HL</span></b></a>
+        <button class="mobile-add" type="button" data-new-product aria-label="Novo produto"><i class="bi bi-plus-lg"></i></button>
+      </div>
+      <div class="content-wrapper">
+        <div class="page-topline"><span><i class="bi bi-house-door me-1"></i> Painel administrativo <i class="bi bi-chevron-right tiny-chevron mx-2"></i> Visão geral</span><span class="today-label" id="todayLabel"></span></div>
+        <header class="page-header reveal">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> BEM-VINDO AO SEU PAINEL</div>
+            <h1>Gestão de <span>estoque.</span></h1>
+            <p>Seus produtos, custos e oportunidades em um só lugar.</p>
+          </div>
+          <div class="header-utilities">
+            <span class="demo-pill"><i class="bi bi-info-circle"></i> Dados de demonstração</span>
+            <button class="button-main" type="button" data-new-product><i class="bi bi-plus-lg"></i> Novo produto</button>
+          </div>
+        </header>
+
+        <section class="row g-3 stats-grid" aria-label="Indicadores de estoque">
+          <div class="col-6 col-xl-3"><div class="stat-card reveal"><div class="stat-top"><span>Capital em estoque</span><span class="stat-icon gold"><i class="bi bi-wallet2"></i></span></div><div class="stat-value" id="stockCostValue">R$ 0,00</div><div class="stat-footer"><i class="bi bi-info-circle"></i> Quantidade × custo</div></div></div>
+          <div class="col-6 col-xl-3"><div class="stat-card reveal"><div class="stat-top"><span>Venda potencial</span><span class="stat-icon plum"><i class="bi bi-tags"></i></span></div><div class="stat-value" id="stockSaleValue">R$ 0,00</div><div class="stat-footer"><i class="bi bi-info-circle"></i> Quantidade × venda</div></div></div>
+          <div class="col-6 col-xl-3"><div class="stat-card reveal"><div class="stat-top"><span>Lucro bruto potencial</span><span class="stat-icon green"><i class="bi bi-graph-up-arrow"></i></span></div><div class="stat-value" id="stockProfitValue">R$ 0,00</div><div class="stat-footer"><i class="bi bi-info-circle"></i> Antes de despesas</div></div></div>
+          <div class="col-6 col-xl-3"><div class="stat-card reveal"><div class="stat-top"><span>Produtos cadastrados</span><span class="stat-icon blue"><i class="bi bi-box-seam"></i></span></div><div class="stat-value" id="totalProducts">0</div><div class="stat-footer"><span id="unitsLabel">0 unidades</span> disponíveis</div></div></div>
+        </section>
+
+        <section class="row g-3 overview-row" aria-label="Resumo do estoque">
+          <div class="col-12 col-xxl-7">
+            <div class="surface overview-surface h-100 reveal">
+              <div class="surface-heading"><div><span class="mini-label">VISÃO GERAL</span><h2>Saúde do estoque</h2><p>Como estão distribuídos os seus produtos.</p></div><span class="quiet-icon"><i class="bi bi-activity"></i></span></div>
+              <div class="health-body"><div class="health-donut" id="healthDonut" role="img" aria-label="Distribuição do estoque"><div><strong id="healthPct">0%</strong><small>disponíveis</small></div></div><div class="health-legend"><div><span class="legend-dot ok"></span><span>Estoque regular</span><b id="healthyCount">0</b></div><div><span class="legend-dot low"></span><span>Estoque baixo</span><b id="lowCount">0</b></div><div><span class="legend-dot out"></span><span>Esgotados</span><b id="outCount">0</b></div><div class="legend-total"><span>Total de unidades</span><b id="totalUnits">0</b></div></div></div>
+            </div>
+          </div>
+          <div class="col-12 col-xxl-5">
+            <div class="surface attention-surface h-100 reveal">
+              <div class="surface-heading"><div><span class="mini-label">PRECISAM DE ATENÇÃO</span><h2>Reposição recomendada</h2><p>Produtos abaixo do estoque mínimo.</p></div><span class="quiet-icon amber"><i class="bi bi-exclamation-triangle"></i></span></div>
+              <div class="attention-list" id="attentionList"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="surface inventory-surface reveal" id="produtos">
+          <div class="section-heading">
+            <div><span class="mini-label">CATÁLOGO INTERNO</span><h2>Gerenciar produtos <span class="count-pill" id="visibleCount">0</span></h2><p>Consulte preços, altere produtos e registre entradas e saídas.</p></div>
+            <div class="section-actions"><button type="button" class="button-outline" id="exportStockExcelBtn"><i class="bi bi-file-earmark-excel"></i><span>Exportar Excel</span></button><button type="button" class="button-soft" id="quickMoveBtn"><i class="bi bi-arrow-left-right"></i><span>Movimentar</span></button></div>
+          </div>
+          <div class="filters-bar">
+            <div class="search-input"><i class="bi bi-search"></i><input id="searchInput" type="search" autocomplete="off" placeholder="Buscar produto, código ou marca..." aria-label="Buscar produtos"></div>
+            <select id="categoryFilter" class="form-select" aria-label="Filtrar por categoria"><option value="all">Todas as categorias</option></select>
+            <select id="statusFilter" class="form-select" aria-label="Filtrar por situação"><option value="all">Todas as situações</option><option value="ok">Disponível</option><option value="low">Estoque baixo</option><option value="out">Esgotado</option></select>
+            <select id="sortFilter" class="form-select sort-select" aria-label="Ordenar produtos"><option value="name">Nome A–Z</option><option value="low">Menor estoque</option><option value="priceDesc">Maior preço</option><option value="marginDesc">Maior margem</option></select>
+          </div>
+          <div class="table-scroll d-none d-lg-block"><table class="data-table"><thead><tr><th>PRODUTO</th><th>CÓDIGO</th><th>ESTOQUE</th><th>CUSTO UNIT.</th><th>VENDA UNIT.</th><th>MARGEM</th><th>SITUAÇÃO</th><th class="text-end">AÇÕES</th></tr></thead><tbody id="productRows"></tbody></table></div>
+          <div class="mobile-products d-lg-none" id="mobileProducts"></div>
+          <div class="inventory-bottom"><span id="resultsLabel">Carregando produtos...</span><span><i class="bi bi-info-circle"></i> Valores ilustrativos em reais</span></div>
+        </section>
+
+        <section class="row g-3 bottom-sections">
+          <div class="col-12 col-xl-7" id="historico"><div class="surface history-surface reveal"><div class="section-heading"><div><span class="mini-label">REGISTRO DE OPERAÇÕES</span><h2>Últimas movimentações</h2><p>Acompanhe entradas, saídas e ajustes.</p></div><button type="button" class="icon-button" id="exportHistoryBtn" title="Exportar movimentações em Excel" aria-label="Exportar movimentações em Excel"><i class="bi bi-download"></i></button></div><div class="history-items" id="historyRows"></div></div></div>
+          <div class="col-12 col-xl-5"><div class="surface category-surface reveal"><div class="section-heading"><div><span class="mini-label">ANÁLISE DE CUSTOS</span><h2>Investimento por categoria</h2><p>Participação no capital imobilizado.</p></div></div><div class="category-bars" id="categoryBars"></div><div class="category-disclaimer">Valores calculados com base no custo informado em cada produto.</div></div></div>
+        </section>
+
+        <section class="finance-section surface reveal" id="relatorios" aria-labelledby="financeHeading">
+          <div class="finance-header">
+            <div><span class="mini-label">GESTÃO FINANCEIRA</span><h2 id="financeHeading">Relatórios <span class="finance-gold">&amp; resultados</span></h2><p>Acompanhe vendas efetivamente registradas, custos, despesas e o resultado do período.</p></div>
+            <div class="finance-actions"><button type="button" class="button-soft" id="newExpenseBtn"><i class="bi bi-receipt"></i> Nova despesa</button><button type="button" class="button-soft" id="newSaleBtn"><i class="bi bi-bag-check"></i> Registrar venda</button><button type="button" class="button-main" id="exportFinanceBtn"><i class="bi bi-file-earmark-excel"></i> Exportar relatório Excel</button></div>
+          </div>
+          <div class="finance-filterbar">
+            <div class="finance-filter-title"><i class="bi bi-calendar3"></i><span>Período do relatório</span></div>
+            <select class="form-select" id="reportPeriod" aria-label="Selecionar período do relatório"><option value="month">Este mês</option><option value="prev">Mês anterior</option><option value="30">Últimos 30 dias</option><option value="all">Todo o histórico</option><option value="custom">Personalizar datas</option></select>
+            <div class="finance-range" id="customDates" hidden><label>De <input type="date" id="reportFrom" class="form-control" aria-label="Data inicial"></label><label>Até <input type="date" id="reportTo" class="form-control" aria-label="Data final"></label></div>
+            <span class="finance-filter-caption" id="reportDateLabel">Carregando período...</span>
+          </div>
+          <div class="finance-kpis" aria-label="Indicadores financeiros no período">
+            <div class="finance-kpi"><span class="finance-kpi-icon green"><i class="bi bi-cash-stack"></i></span><span>Receita de vendas</span><strong id="reportRevenue">R$ 0,00</strong><small id="reportSalesCount">0 vendas registradas</small></div>
+            <div class="finance-kpi"><span class="finance-kpi-icon amber"><i class="bi bi-box-arrow-up-right"></i></span><span>Custo das mercadorias</span><strong id="reportCogs">R$ 0,00</strong><small>Custos registrados na venda</small></div>
+            <div class="finance-kpi"><span class="finance-kpi-icon blue"><i class="bi bi-receipt-cutoff"></i></span><span>Despesas do período</span><strong id="reportExpenses">R$ 0,00</strong><small id="reportExpenseCount">0 lançamentos</small></div>
+            <div class="finance-kpi finance-kpi-result"><span class="finance-kpi-icon gold"><i class="bi bi-graph-up-arrow"></i></span><span>Resultado estimado</span><strong id="reportResult">R$ 0,00</strong><small>Vendas − custos − despesas</small></div>
+          </div>
+          <div class="finance-hint"><i class="bi bi-info-circle"></i><span>Os números acima são de <b>vendas registradas</b>, não do valor potencial do estoque. Uma saída comum ou ajuste não gera receita. Resultado gerencial estimado, sem tributos ou contas a receber.</span></div>
+          <div class="finance-charts">
+            <div class="finance-block"><div class="finance-block-top"><div><span class="mini-label">EVOLUÇÃO</span><h3>Vendas por mês</h3></div><small>Últimos 6 meses</small></div><div class="monthly-bars" id="monthlySalesBars"></div></div>
+            <div class="finance-block"><div class="finance-block-top"><div><span class="mini-label">MAIOR FATURAMENTO</span><h3>Produtos vendidos</h3></div><small>Período selecionado</small></div><div id="topSoldProducts" class="top-sales-list"></div></div>
+          </div>
+          <div class="finance-lists">
+            <div class="finance-block"><div class="finance-block-top"><div><span class="mini-label">REGISTROS DE VENDAS</span><h3>Vendas do período</h3></div><span class="finance-count" id="saleTableCount">0</span></div><div class="finance-table-scroll"><table class="finance-table"><thead><tr><th>DATA / PRODUTO</th><th>QTD.</th><th>RECEITA</th><th>LUCRO BRUTO</th><th class="text-end">AÇÃO</th></tr></thead><tbody id="salesReportRows"></tbody></table></div></div>
+            <div class="finance-block"><div class="finance-block-top"><div><span class="mini-label">LANÇAMENTOS FINANCEIROS</span><h3>Despesas do período</h3></div><span class="finance-count" id="expenseTableCount">0</span></div><div class="finance-table-scroll"><table class="finance-table"><thead><tr><th>DATA / DESCRIÇÃO</th><th>CATEGORIA</th><th>VALOR</th><th class="text-end">AÇÃO</th></tr></thead><tbody id="expensesReportRows"></tbody></table></div></div>
+          </div>
+        </section>
+        <div class="page-footer"><div><i class="bi bi-lock"></i> Esta versão salva os dados apenas neste navegador. Sem login ou sincronização entre dispositivos.</div><div class="footer-actions"><button id="backupBtn" type="button"><i class="bi bi-cloud-arrow-down"></i> Salvar backup</button><button id="restoreBtn" type="button"><i class="bi bi-cloud-arrow-up"></i> Restaurar backup</button><input id="restoreInput" type="file" accept="application/json,.json" hidden></div></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="offcanvas offcanvas-start mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavTitle">
+    <div class="offcanvas-header"><div class="brand"><span class="brand-logo"><img src="assets/logo-hl.jpg" alt=""></span><span class="brand-copy"><b id="mobileNavTitle">GRUPO <em>HL</em></b><small>GESTÃO & ESTOQUE</small></span></div><button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button></div>
+    <div class="offcanvas-body"><nav class="side-nav"><a class="side-link active" href="#inicio" data-section="inicio"><i class="bi bi-grid-1x2"></i> Visão geral</a><a class="side-link" href="#produtos" data-section="produtos"><i class="bi bi-box-seam"></i> Produtos</a><a class="side-link" href="#historico" data-section="historico"><i class="bi bi-arrow-left-right"></i> Movimentações</a><a class="side-link" href="#relatorios" data-section="relatorios"><i class="bi bi-bar-chart-line"></i> Relatórios</a></nav><div class="mobile-drawer-caption">Versão demonstrativa • Grupo HL</div></div>
+  </div>
+
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content polished-modal"><form id="productForm"><div class="modal-header"><div><div class="modal-kicker">CADASTRO DE PRODUTOS</div><h2 class="modal-title" id="productModalTitle">Novo produto</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><div class="row g-3"><div class="col-md-8"><label for="pName" class="form-label">Nome do produto <span>*</span></label><input class="form-control" id="pName" required maxlength="120" placeholder="Ex.: Máquina de acabamento profissional"></div><div class="col-md-4"><label for="pSku" class="form-label">Código / SKU <span>*</span></label><input class="form-control" id="pSku" required maxlength="40" placeholder="HL-0001"></div><div class="col-md-6"><label for="pBrand" class="form-label">Marca</label><input class="form-control" id="pBrand" maxlength="60" placeholder="Marca ou fabricante"></div><div class="col-md-6"><label for="pCategory" class="form-label">Categoria <span>*</span></label><select class="form-select" id="pCategory" required><option>Máquinas</option><option>Cosméticos</option><option>Acessórios</option><option>Descartáveis</option><option>Kits</option><option>Outros</option></select></div><div class="col-md-4"><label for="pQty" class="form-label">Quantidade inicial <span>*</span></label><input class="form-control" type="number" min="0" step="1" id="pQty" required></div><div class="col-md-4"><label for="pMin" class="form-label">Estoque mínimo <span>*</span></label><input class="form-control" type="number" min="0" step="1" id="pMin" required></div><div class="col-md-4"><label for="pCost" class="form-label">Custo por unidade (R$) <span>*</span></label><input class="form-control" type="number" min="0" step="0.01" id="pCost" required></div><div class="col-md-6"><label for="pPrice" class="form-label">Preço de venda (R$) <span>*</span></label><input class="form-control" type="number" min="0" step="0.01" id="pPrice" required></div><div class="col-md-6"><div class="profit-preview"><div><span>Lucro bruto por unidade</span><strong id="profitPreview">R$ 0,00</strong></div><div><span>Margem sobre venda</span><strong id="marginPreview">0%</strong></div></div></div></div><div class="form-hint" id="editQtyHint"><i class="bi bi-lightbulb"></i> Para alterar quantidades de um produto existente, use “Movimentar” e mantenha o histórico.</div></div><div class="modal-footer"><button type="button" class="button-outline" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="button-main"><i class="bi bi-check2"></i> Salvar produto</button></div></form></div></div>
+  </div>
+
+  <div class="modal fade" id="moveModal" tabindex="-1" aria-labelledby="moveModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content polished-modal"><form id="moveForm"><div class="modal-header"><div><div class="modal-kicker">CONTROLE DE ENTRADAS E SAÍDAS</div><h2 class="modal-title" id="moveModalTitle">Movimentar estoque</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><div class="move-product" id="moveProductName"></div><div class="mb-3"><label for="moveType" class="form-label">Tipo de movimentação</label><select class="form-select" id="moveType"><option value="in">Entrada de produtos</option><option value="out">Saída sem venda</option><option value="sale">Venda realizada (baixa + financeiro)</option><option value="set">Ajuste / contagem física</option></select></div><div class="mb-3"><label class="form-label" for="moveQty" id="moveQtyLabel">Quantidade</label><input class="form-control" id="moveQty" type="number" min="0" step="1" required></div><div class="sale-move-fields" id="saleMoveFields" hidden><div class="mb-2"><label for="moveSalePrice" class="form-label">Preço de venda por unidade (R$)</label><input class="form-control" id="moveSalePrice" type="number" min="0" step="0.01"></div><div class="sale-move-preview"><span>Receita total: <strong id="saleTotalPreview">R$ 0,00</strong></span><small>O custo atual será salvo para o cálculo do lucro desta venda.</small></div></div><div class="mb-3"><label for="moveNote" class="form-label">Observação</label><input class="form-control" id="moveNote" maxlength="160" placeholder="Ex.: Venda, nova remessa, ajuste de inventário"></div><div class="new-stock-preview"><span>Estoque após esta operação</span><strong id="moveAfter">—</strong></div></div><div class="modal-footer"><button type="button" class="button-outline" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="button-main"><i class="bi bi-check2"></i> Confirmar operação</button></div></form></div></div></div>
+  </div>
+
+  <div class="modal fade" id="selectMoveModal" tabindex="-1" aria-labelledby="selectMoveTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content polished-modal"><div class="modal-header"><div><div class="modal-kicker">MOVIMENTAÇÃO RÁPIDA</div><h2 class="modal-title" id="selectMoveTitle">Selecionar produto</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><label for="quickProductSelect" class="form-label">Qual produto deseja movimentar?</label><select id="quickProductSelect" class="form-select"></select></div><div class="modal-footer"><button type="button" class="button-outline" data-bs-dismiss="modal">Cancelar</button><button type="button" class="button-main" id="continueMoveBtn">Continuar <i class="bi bi-arrow-right"></i></button></div></div></div></div>
+  </div>
+  <div class="modal fade" id="expenseModal" tabindex="-1" aria-labelledby="expenseModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content polished-modal"><form id="expenseForm"><div class="modal-header"><div><div class="modal-kicker">FINANCEIRO</div><h2 class="modal-title" id="expenseModalTitle">Registrar despesa</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><div class="row g-3"><div class="col-12"><label class="form-label" for="eDescription">Descrição <span>*</span></label><input id="eDescription" class="form-control" required maxlength="120" placeholder="Ex.: Frete, aluguel, embalagem..."></div><div class="col-6"><label class="form-label" for="eAmount">Valor (R$) <span>*</span></label><input id="eAmount" class="form-control" type="number" min="0.01" step="0.01" required></div><div class="col-6"><label class="form-label" for="eDate">Data <span>*</span></label><input id="eDate" class="form-control" type="date" required></div><div class="col-12"><label class="form-label" for="eCategory">Categoria</label><select id="eCategory" class="form-select"><option>Transporte e frete</option><option>Embalagens</option><option>Aluguel</option><option>Marketing</option><option>Energia e internet</option><option>Serviços</option><option>Outros</option></select></div></div><div class="form-hint"><i class="bi bi-info-circle"></i> Lançar a compra de mercadorias como despesa pode duplicar o custo que já é abatido na venda. Use despesas operacionais.</div></div><div class="modal-footer"><button type="button" class="button-outline" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="button-main"><i class="bi bi-check2"></i> Salvar despesa</button></div></form></div></div></div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3"><div class="toast app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true"><div class="toast-body"><i class="bi bi-check-circle-fill"></i><span id="toastText">Pronto!</span><button class="btn-close btn-close-white ms-auto" type="button" data-bs-dismiss="toast" aria-label="Fechar"></button></div></div></div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/excel.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
